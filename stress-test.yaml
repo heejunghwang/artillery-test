@@ -1,0 +1,26 @@
+config:
+  target: "http://sample.com"
+  phases:
+    - duration: 5
+      arrivalRate: 2
+      rampTo: 50
+      name: "Warm up"
+    - duration: 10
+      arrivalRate: 20
+      maxVusers: 50
+      name: "Sustained max load"
+  environments:
+    production:
+      target: "http://sample.prod.com"
+      phases:
+        - duration: 120
+          arrivalRate: 10
+    staging:
+      target: "http://sample.dev"
+      phases:
+        - duration: 1200
+          arrivalRate: 20
+scenarios:
+  - flow:
+    - get:
+        url: "/"
